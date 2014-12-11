@@ -1,4 +1,6 @@
+source 'https://rubygems.org'
 group :development, :test do
-  gem 'simplecov'
+  gem 'pry-meta'
   gem 'rspec'
+  gem 'simplecov'
 end
