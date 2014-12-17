@@ -11,7 +11,7 @@ RSpec.describe QuakeLogParser::Executor do
 
     context "with parameters" do
       it "will call Parser.parse_from_file" do
-        expect(QuakeLogParser::Parser).to receive(:parse_from_file)
+        expect_any_instance_of(QuakeLogParser::Parser).to receive(:parse_from_file)
         described_class.run ["games.log"]
       end
     end
