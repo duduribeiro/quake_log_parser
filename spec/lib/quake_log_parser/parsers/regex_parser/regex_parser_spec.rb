@@ -24,10 +24,44 @@ RSpec.describe QuakeLogParser::Parsers::RegexParser do
       allow(command_analyzer).to receive(:process).with("another").and_return("another")
     end
     it "call the process based on line" do
-      expect(init_command).to receive(:process).with("init").once
-      expect(another_command).to receive(:process).with("another").once
+      expect(init_command).to receive(:process).with("init", anything).once
+      expect(another_command).to receive(:process).with("another", anything).once
       regex_parser.process_from_command("init")
       regex_parser.process_from_command("another")
+    end
+    context "with a shutdown line" do
+      it "will call save_game" do
+        game = double("game", finalized?: true)
+        allow(game).to receive(:round=)
+        regex_parser.instance_variable_set(:@game, game)
+        expect(regex_parser).to receive(:save_game).with(game).and_call_original
+        allow(another_command).to receive(:process).with("another", anything).once
+        regex_parser.process_from_command("another")
+      end
+    end
+    context "without a shutdown line" do
+      it "will not call save_game" do
+        game = double("game", finalized?: false)
+        allow(game).to receive(:round=)
+        regex_parser.instance_variable_set(:@game, game)
+        expect(regex_parser).to_not receive(:save_game).with(game).and_call_original
+        allow(another_command).to receive(:process).with("another", anything).once
+        regex_parser.process_from_command("another")
+      end
+    end
+  end
+  describe "#save_game" do
+    let(:game) { double("game", "round=" => nil ) }
+    before :each do
+      regex_parser.instance_variable_set(:@game, game)
+      regex_parser.instance_variable_set(:@last_round, 2)
+      regex_parser.send(:save_game, game)
+    end
+    it "will increment the last_round number" do
+      expect(regex_parser.instance_variable_get(:@last_round)).to eq 3
+    end
+    it "will add the game in the games array" do
+      expect(regex_parser.instance_variable_get(:@games).size).to eq 1
     end
   end
 end
