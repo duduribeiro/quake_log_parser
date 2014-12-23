@@ -2,8 +2,9 @@ module QuakeLogParser
   module Parsers
     module Analyzers
       class RegexBaseAnalyzer
-        def initialize(regex)
+        def initialize(regex, game)
           @regex = regex
+          @game  = game
         end
 
         def process(line)

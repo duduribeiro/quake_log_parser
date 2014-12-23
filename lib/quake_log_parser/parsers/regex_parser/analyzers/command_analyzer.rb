@@ -2,8 +2,8 @@ module QuakeLogParser
   module Parsers
     module Analyzers
       class CommandAnalyzer < RegexBaseAnalyzer
-        def initialize(game)
-          super(/^\s*\d*.\d*\s*(.*)?:/)
+        def initialize()
+          super(/^\s*\d*.\d*\s*(.*)?:/, nil)
         end
 
         def process(line)
