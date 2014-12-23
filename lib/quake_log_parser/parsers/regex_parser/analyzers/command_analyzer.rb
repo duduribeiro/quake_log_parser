@@ -3,7 +3,7 @@ module QuakeLogParser
     module Analyzers
       class CommandAnalyzer < RegexBaseAnalyzer
         def initialize()
-          super(/^\s*\d*.\d*\s*(.*)?:/, nil)
+          super(/^\s*\d*.\d*\s*(.*)?:/)
         end
 
         def process(line)

@@ -2,12 +2,11 @@ module QuakeLogParser
   module Parsers
     module Analyzers
       class RegexBaseAnalyzer
-        def initialize(regex, game)
+        def initialize(regex)
           @regex = regex
-          @game  = game
         end
 
-        def process(line)
+        def process(line, game)
           raise NotImplementedError
         end
       end
