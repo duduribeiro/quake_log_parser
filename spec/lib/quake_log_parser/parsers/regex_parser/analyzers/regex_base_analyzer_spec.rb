@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe QuakeLogParser::Parsers::Analyzers::RegexBaseAnalyzer do
-  let(:regex) { double("regex") } 
-  let(:analyzer) { described_class.new(regex) }
+  let(:regex) { double("regex") }
+  let(:game)  { double("game")  }
+  let(:analyzer) { described_class.new(regex, game) }
   describe "#initialize" do
     it "will set the regex variable" do
       expect(analyzer.instance_variable_get(:@regex)).to eq(regex)
