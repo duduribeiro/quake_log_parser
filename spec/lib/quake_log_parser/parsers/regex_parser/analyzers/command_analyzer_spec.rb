@@ -17,5 +17,12 @@ RSpec.describe QuakeLogParser::Parsers::Analyzers::CommandAnalyzer do
         expect(command.process(line)).to eq "InitGame"
       end
     end
+
+    context "without a command in the line" do
+      it "will returns a blank string" do
+        line = '  0:00 ------------------------------------------------------------'
+        expect(command.process(line)).to eq ""
+      end
+    end
   end
 end

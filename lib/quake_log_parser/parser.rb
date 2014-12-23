@@ -6,7 +6,7 @@ module QuakeLogParser
     end
     def parse_from_file(file)
       while (line = file.gets)
-        puts line
+        @parser.process_from_command(line) 
       end
     end
   end

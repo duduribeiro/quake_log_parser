@@ -1,9 +1,9 @@
 module QuakeLogParser
   module Parsers
-    class RegexParser < BaseParser
-      ANALYZERS = [  ]
+    class RegexParser
       def initialize
-        super
+        @analyzers_by_command = {
+        }
       end
     end
   end
