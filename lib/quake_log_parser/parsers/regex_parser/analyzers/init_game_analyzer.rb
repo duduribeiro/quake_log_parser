@@ -7,7 +7,7 @@ module QuakeLogParser
         end
 
         def process(line)
-          @game.initialized = true
+          @game.start_game
           @game.hostname = @regex.match(line).captures.first
         end
       end
