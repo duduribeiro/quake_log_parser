@@ -10,6 +10,10 @@ module QuakeLogParser
       def started?
         !!@started
       end
+
+      def shutdown
+        @started = false
+      end
     end
   end
 end

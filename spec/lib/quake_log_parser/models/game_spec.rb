@@ -25,4 +25,12 @@ RSpec.describe QuakeLogParser::Models::Game do
       end
     end
   end
+
+  describe "#shutdown" do
+    it "finalizes the game" do
+      game.start_game
+      game.shutdown
+      expect(game.started?).to be_falsey
+    end
+  end
 end
