@@ -1,7 +1,7 @@
 module QuakeLogParser
   module Models
     class Game
-      attr_accessor :hostname
+      attr_accessor :hostname, :round
 
       def start_game
         @started = true
@@ -12,7 +12,11 @@ module QuakeLogParser
       end
 
       def shutdown
-        @started = false
+        @finalized = true
+      end
+
+      def finalized?
+       !!@finalized
       end
     end
   end
