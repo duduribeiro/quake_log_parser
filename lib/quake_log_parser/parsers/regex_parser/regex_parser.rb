@@ -6,8 +6,11 @@ module QuakeLogParser
         @game = new_game
         @last_round = 0
         @analyzers_by_command = {
-          "InitGame" => QuakeLogParser::Parsers::Analyzers::InitGameAnalyzer.new,
-          "ShutdownGame" => QuakeLogParser::Parsers::Analyzers::ShutdownGameAnalyzer.new
+          "InitGame"              => QuakeLogParser::Parsers::Analyzers::InitGameAnalyzer.new,
+          "ShutdownGame"          => QuakeLogParser::Parsers::Analyzers::ShutdownGameAnalyzer.new,
+          "Kill"                  => QuakeLogParser::Parsers::Analyzers::KillAnalyzer.new,
+          "ClientConnect"         => QuakeLogParser::Parsers::Analyzers::ClientConnectAnalyzer.new,
+          "ClientUserinfoChanged" => QuakeLogParser::Parsers::Analyzers::ClientChangeInfoAnalyzer.new
         }
         @command_analyzer = QuakeLogParser::Parsers::Analyzers::CommandAnalyzer.new
       end
