@@ -2,12 +2,12 @@ module QuakeLogParser
   module Parsers
     module Analyzers
       class ShutdownGameAnalyzer < RegexBaseAnalyzer
-        def initialize
-          super(//)
+        def initialize(game)
+          super(//,game)
         end
 
-        def process(line, game)
-          game.shutdown
+        def process(line)
+          @game.shutdown
         end
       end
     end
