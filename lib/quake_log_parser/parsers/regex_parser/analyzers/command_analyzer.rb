@@ -3,11 +3,15 @@ module QuakeLogParser
     module Analyzers
       class CommandAnalyzer < RegexBaseAnalyzer
         def initialize()
-          super(/^\s*\d*.\d*\s*(.*)?:/)
+          super(/^.*?:\d*\s*(.*?):/)
         end
 
         def process(line)
-          @regex.match(line).captures.first
+          if @regex.match(line)
+            @regex.match(line).captures.first
+          else
+            ""
+          end
         end
       end
     end
