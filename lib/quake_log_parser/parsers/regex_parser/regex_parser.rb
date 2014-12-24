@@ -11,6 +11,7 @@ module QuakeLogParser
           "InitGame"              => QuakeLogParser::Parsers::Analyzers::InitGameAnalyzer.new,
           "Kill"                  => QuakeLogParser::Parsers::Analyzers::KillAnalyzer.new,
           "ShutdownGame"          => QuakeLogParser::Parsers::Analyzers::ShutdownGameAnalyzer.new,
+          "-------"               => QuakeLogParser::Parsers::Analyzers::ShutdownGameAnalyzer.new,
         }
         @command_analyzer = QuakeLogParser::Parsers::Analyzers::CommandAnalyzer.new
       end
@@ -25,6 +26,7 @@ module QuakeLogParser
       private
       def save_game(game)
         game.round = @last_round+=1
+        p QuakeLogParser::Models::Reports::GameReport.generate(game)
         @games << game
         new_game
       end
