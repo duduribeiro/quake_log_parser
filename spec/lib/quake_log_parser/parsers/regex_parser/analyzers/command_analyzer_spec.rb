@@ -5,7 +5,7 @@ RSpec.describe QuakeLogParser::Parsers::Analyzers::CommandAnalyzer do
   let(:command) { described_class.new }
   describe "#initialize" do
     it "set the regex of the base_analyzer" do 
-      expect_any_instance_of(QuakeLogParser::Parsers::Analyzers::RegexBaseAnalyzer).to receive(:initialize).with(/^.*?:\d*\s*(.*?):/).and_call_original
+      expect_any_instance_of(QuakeLogParser::Parsers::Analyzers::RegexBaseAnalyzer).to receive(:initialize).with(/^.*?:\d*\s*((.*):|-------)/).and_call_original
       command
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe QuakeLogParser::Parsers::Analyzers::CommandAnalyzer do
 
     context "without a command in the line" do
       it "will returns a blank string" do
-        line = '  0:00 ------------------------------------------------------------'
+        line = '  0:00 xxxxxx'
         expect(command.process(line)).to eq ""
       end
     end
