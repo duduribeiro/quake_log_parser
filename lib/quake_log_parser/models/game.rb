@@ -1,10 +1,12 @@
 module QuakeLogParser
   module Models
     class Game
+      attr_reader   :kills
       attr_accessor :hostname, :round
 
       def initialize
         @players = { }
+        @kills   = 0
       end
 
       def add_player(player_id)
@@ -19,6 +21,17 @@ module QuakeLogParser
 
       def finalized?
        !!@finalized
+      end
+
+      def kill(player_killer_id, player_dead_id, mod_kill)
+        @kills += 1
+        player_killer = @players[player_killer_id]
+        player_dead   = @players[player_dead_id]
+        if Player.is_world?(player_killer_id)
+          player_dead.decrease_kills
+        else
+          player_killer.increase_kills
+        end
       end
 
       def start_game
