@@ -1,7 +1,7 @@
 module QuakeLogParser
   module Models
     class Game
-      attr_reader   :kills
+      attr_reader   :kills, :players
       attr_accessor :hostname, :round
 
       def initialize
@@ -10,7 +10,7 @@ module QuakeLogParser
       end
 
       def add_player(player_id)
-        @players[player_id] = Player.new
+        @players[player_id] = Player.new unless @players[player_id]
       end
 
       def change_player_name(player_id, player_name)
