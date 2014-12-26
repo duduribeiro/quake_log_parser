@@ -13,7 +13,8 @@ module QuakeLogParser
             "game_#{game.round}" => {
               total_kills: game.kills,
               players: game.players.map{|id, player| player.name},
-              kills: kills_by_players
+              kills: kills_by_players,
+              kills_by_means: game.kills_by_means
             }
           }
         end

@@ -1,6 +1,7 @@
 require 'quake_log_parser/version'
 require 'quake_log_parser/executor'
 require 'quake_log_parser/parser'
+require 'quake_log_parser/models/mean_of_death'
 require 'quake_log_parser/models/game'
 require 'quake_log_parser/models/player'
 require 'quake_log_parser/models/reports/game_report'

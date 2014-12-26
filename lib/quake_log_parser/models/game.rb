@@ -1,12 +1,13 @@
 module QuakeLogParser
   module Models
     class Game
-      attr_reader   :kills, :players
+      attr_reader   :kills, :players, :kills_by_means
       attr_accessor :hostname, :round
 
       def initialize
-        @players = { }
-        @kills   = 0
+        @players        = { }
+        @kills          = 0
+        @kills_by_means = Hash.new(0)
       end
 
       def add_player(player_id)
@@ -30,6 +31,7 @@ module QuakeLogParser
         if Player.is_world?(player_killer_id)
           player_dead.decrease_kills
         else
+          @kills_by_means[MeanOfDeath.get_by_value(mod_kill)]+= 1
           player_killer.increase_kills
         end
       end

@@ -68,6 +68,10 @@ RSpec.describe QuakeLogParser::Models::Game do
           game.kill(QuakeLogParser::Models::Player::WORLD_ID, 2, 1)
         }.to change(game, :kills).by(1)
       end
+      it "will not increase the kills_by_means array" do
+        game.kill(QuakeLogParser::Models::Player::WORLD_ID, 2, 1)
+        expect(game.kills_by_means["MOD_SHOTGUN"]).to eq 0
+      end
     end
 
     context "when a player kills another player" do
@@ -81,9 +85,12 @@ RSpec.describe QuakeLogParser::Models::Game do
         expect{game.kill(2,3,1)}.to change(player_killer, :kills_count)
           .by(1)
       end
-
       it "increase the game kills count" do
         expect{game.kill(2,3,1)}.to change(game, :kills).by(1)
+      end
+      it "increase the kills_by_means array" do
+        game.kill(2,3,1)
+        expect(game.kills_by_means["MOD_SHOTGUN"]).to_not eq 0
       end
     end
   end

@@ -31,7 +31,7 @@ RSpec.describe QuakeLogParser::Parsers::RegexParser do
     end
     context "with a shutdown line" do
       it "will call save_game" do
-        game = double("game", finalized?: true, players: [], round: 2, kills: 2)
+        game = double("game", finalized?: true, players: [], round: 2, kills: 2, kills_by_means: {})
         allow(game).to receive(:round=)
         regex_parser.instance_variable_set(:@game, game)
         expect(regex_parser).to receive(:save_game).with(game).and_call_original
@@ -51,7 +51,7 @@ RSpec.describe QuakeLogParser::Parsers::RegexParser do
     end
   end
   describe "#save_game" do
-    let(:game) { double("game", "round=" => nil, players: [], round: 5, kills: 5 ) }
+    let(:game) { double("game", "round=" => nil, players: [], round: 5, kills: 5, kills_by_means: {} ) }
     before :each do
       regex_parser.instance_variable_set(:@game, game)
       regex_parser.instance_variable_set(:@last_round, 2)
