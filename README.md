@@ -1,6 +1,6 @@
 # QuakeLogParser
 
-## Instalação
+## Setup
 To use the QuakeLogParser, follow the instructions
 ```
     git clone git@bitbucket.org:duduribeiro/quake_log_parser.git
