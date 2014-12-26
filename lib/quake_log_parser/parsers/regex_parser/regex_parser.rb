@@ -23,6 +23,11 @@ module QuakeLogParser
         save_game(@game) if @game.finalized?
       end
 
+      def generate_general_report
+        p "----------------------------------------"
+        p QuakeLogParser::Models::Reports::GeneralReport.generate(@games)
+      end
+
       private
       def save_game(game)
         game.round = @last_round+=1

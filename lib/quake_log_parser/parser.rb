@@ -8,6 +8,7 @@ module QuakeLogParser
       while (line = file.gets)
         @parser.process_from_command(line)
       end
+      @parser.generate_general_report
     end
   end
 end

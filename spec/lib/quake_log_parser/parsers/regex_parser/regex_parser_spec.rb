@@ -50,6 +50,14 @@ RSpec.describe QuakeLogParser::Parsers::RegexParser do
       end
     end
   end
+  describe "#generate_general_report" do
+    it "will call GeneralReport class" do
+      games = double("games")
+      regex_parser.instance_variable_set(:@games, games)
+      expect(QuakeLogParser::Models::Reports::GeneralReport).to receive(:generate).with(games)
+      regex_parser.generate_general_report
+    end
+  end
   describe "#save_game" do
     let(:game) { double("game", "round=" => nil, players: [], round: 5, kills: 5, kills_by_means: {} ) }
     before :each do
