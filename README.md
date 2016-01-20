@@ -14,7 +14,7 @@ The main ruby only call the Executor class (Responsible to inject the parser to 
 The main parser ( lib/quake_log_parser/parser.rb ) will read the lines from the file, and call the injected parser to process it.
 The code was created based on regex to check what command the line represent (In the future would be nice to create the parse using Parslet or Treetop to create a grammar for the log parser). 
 
-I splited the line commands in analyzers.
+I split the line commands in analyzers.
 The `CommandAnalyzer` will check what command the line parsed represent, and will call the associated analyzer with the command.
 All Regex analyzers are in lib/quake_log_parser/parsers/regex_parser/analyzers/.
 To create a new analyzer, just create the file in the folder lib/quake_log_parser/parsers/regex_parser/analyzers/ and register the analyzer with a command in lib/quake_log_parser/parsers/regex_parser/regex_parser.rb in the `@analyzers_by_command` variable.
