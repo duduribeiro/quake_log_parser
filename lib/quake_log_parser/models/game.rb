@@ -14,16 +14,25 @@ module QuakeLogParser::Models
     end
 
     def add_player(player_id)
-      @players[player_id] = Player.new(player_id) unless @players[player_id]
+      id = player_id.to_i
+      @players[id] = Player.new(id) unless @players[id]
     end
 
     def kill(killer_id, ghost_id, _mean_of_death_id)
-      player = @players[killer_id]
+      player = @players[killer_id.to_i]
       if player.world?
-        @kills_by_player[ghost_id] -= 1
+        @kills_by_player[ghost_id.to_i] -= 1
       else
-        @kills_by_player[killer_id] += 1
+        @kills_by_player[killer_id.to_i] += 1
       end
+    end
+
+    def finalized?
+      !!@finalized
+    end
+
+    def shutdown
+      @finalized = true
     end
   end
 end
