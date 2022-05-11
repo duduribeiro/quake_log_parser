@@ -1,4 +1,3 @@
-require "quake_log_parser/parser"
-
 module QuakeLogParser
+  require "quake_log_parser/parser"
 end
