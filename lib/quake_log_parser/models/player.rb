@@ -7,5 +7,9 @@ module QuakeLogParser::Models
       @player_id = player_id
       @name = ""
     end
+
+    def world?
+      false
+    end
   end
 end

@@ -8,4 +8,8 @@ class QuakeLogParser::Models::PlayerTest < Minitest::Test
 
     assert_equal "Batman", player.name
   end
+
+  def test_it_is_not_a_world
+    refute QuakeLogParser::Models::Player.new(42).world?
+  end
 end
