@@ -21,7 +21,6 @@ module QuakeLogParser::ParserStrategies
       (#{COMMANDS.keys.join('|')}):     # Captures all implemented commands until the colon. eg: `Kill:` will capture `Kill`. This is the same as (InitGame|Kill|..) but reusing the COMMANDS keys for it.
     }x
 
-
     # Process the log line and return the proper command with the extra arguments found on the line.
     #
     # @param [String] line - The line of the log that will be parsed via regex
