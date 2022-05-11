@@ -48,6 +48,17 @@ class QuakeLogParser::Models::GameTest < Minitest::Test
     assert_equal 0, @game.kills_for(42)
   end
 
+  def test_kill_counts_the_righ_mean_of_death
+    @game.add_player(42)
+    @game.add_player(10)
+    @game.kill(42, 10, 22)
+    @game.kill(42, 10, 22)
+    @game.kill(42, 10, 6)
+
+    assert_equal 2, @game.kills_by_mean[QuakeLogParser::Models::MeanOfDeath.get_by_value(22)]
+    assert_equal 1, @game.kills_by_mean[QuakeLogParser::Models::MeanOfDeath.get_by_value(6)]
+  end
+
   def test_shutdown_finalizes_a_started_game
     refute @game.finalized?
 

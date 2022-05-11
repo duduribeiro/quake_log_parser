@@ -16,7 +16,8 @@ module QuakeLogParser::Models::Reports
         "game_#{@game.round}" => {
           total_kills: @game.total_kills,
           players: @players,
-          kills: @game.kills_by_player
+          kills: @game.kills_by_player,
+          kills_by_means: @game.kills_by_mean
         }
       }
     end
