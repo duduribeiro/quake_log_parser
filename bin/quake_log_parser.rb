@@ -7,7 +7,7 @@ require "json"
 puts "-- Quake Log Parser"
 
 filename = ARGV.first
-reports = QuakeLogParser::Parser.new(filename).parse_reports
+reports = QuakeLogParser::Parser.new(filename).parse_and_generate_reports
 
 reports.each do |report|
   puts JSON.pretty_generate(report.as_json)

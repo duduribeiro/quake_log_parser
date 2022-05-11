@@ -13,7 +13,7 @@ module QuakeLogParser
       @games = []
     end
 
-    def parse_reports
+    def parse_and_generate_reports
       reports = []
       while (line = @file.gets)
         cmd, args = @parse_strategy.get_command_and_args(line)
