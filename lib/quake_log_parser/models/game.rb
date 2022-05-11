@@ -4,13 +4,14 @@ require "quake_log_parser/models/world"
 module QuakeLogParser::Models
   class Game
     attr_accessor :hostname
-    attr_reader :players, :kills_by_player
+    attr_reader :players, :kills_by_player, :round
 
-    def initialize
+    def initialize(round = 0)
       @players = {}
       world = World.new
       @players[world.player_id] = world
       @kills_by_player = Hash.new(0)
+      @round = round
     end
 
     def add_player(player_id)
@@ -27,12 +28,20 @@ module QuakeLogParser::Models
       end
     end
 
+    def start
+      @started = true
+    end
+
+    def started?
+      !!@started
+    end
+
     def finalized?
       !!@finalized
     end
 
     def shutdown
-      @finalized = true
+      @finalized = true if started?
     end
   end
 end

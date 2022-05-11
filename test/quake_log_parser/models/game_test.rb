@@ -28,11 +28,21 @@ class QuakeLogParser::Models::GameTest < Minitest::Test
     assert_equal 0, @game.kills_by_player[42]
   end
 
-  def test_shutdown_finalizes_the_game
+  def test_shutdown_finalizes_a_started_game
     refute @game.finalized?
 
+    @game.start
     @game.shutdown
 
     assert @game.finalized?
+  end
+
+  def test_shutdown_does_not_finalizes_a_not_started_game
+    refute @game.finalized?
+    refute @game.started?
+
+    @game.shutdown
+
+    refute @game.finalized?
   end
 end
