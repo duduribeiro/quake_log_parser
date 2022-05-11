@@ -17,6 +17,12 @@ Or you can execute a devcontainer via VSCode.
 * After started go to the terminal and run `bundle` and `rake` to install the dependencies and run the tests.
 * To run the parser itself, run `bin/quake_log_parser.rb qgames.txt` where qgames.txt is the path to the log file.
 
+
+Running devcontainer via vscode:
+https://user-images.githubusercontent.com/771411/167949279-1dba296e-ab3d-4c9c-9566-f608d06d3981.mov
+
+
+
 ## The Code
 With the CLI code located at `bin` and a separated lib folder, it's easy to move the code to a future gem project.
 
