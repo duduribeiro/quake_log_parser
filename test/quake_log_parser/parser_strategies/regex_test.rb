@@ -40,6 +40,13 @@ class QuakeLogParser::ParserStrategies::RegexTest < Minitest::Test
     assert_empty args
   end
 
+  def test_get_command_and_args_considers_line_separator_as_shutdown_command
+    cmd, args = @regex_strategy.get_command_and_args("12:13 ------------------------------------------------------------")
+
+    assert_equal QuakeLogParser::Commands::ShutdownGame, cmd
+    assert_empty args
+  end
+
   def test_get_command_and_args_return_empty_for_a_non_implemented_command
     cmd, args = @regex_strategy.get_command_and_args("15:00 Exit: Timelimit hit.")
 

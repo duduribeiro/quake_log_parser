@@ -12,13 +12,15 @@ module QuakeLogParser::ParserStrategies
       ClientConnect: {command: QuakeLogParser::Commands::ClientConnect, args_regex: /ClientConnect:\s*(\d+)/},
       ClientUserinfoChanged: {command: QuakeLogParser::Commands::ClientUserInfoChanged, args_regex: /ClientUserinfoChanged:\s*(\d*).*n\\(.*?)\\/},
       Kill: {command: QuakeLogParser::Commands::Kill, args_regex: /Kill:\s+(\d*)\s*(\d*)\s*(\d*)/},
-      ShutdownGame: {command: QuakeLogParser::Commands::ShutdownGame, args_regex: //}
+      ShutdownGame: {command: QuakeLogParser::Commands::ShutdownGame, args_regex: //},
+      "-----": {command: QuakeLogParser::Commands::ShutdownGame, args_regex: //}
     }
 
     COMMAND_REGEX = %r{
       \d?\d:\d\d                        # The start of the content that contains the time. eg: 20:37
       \s                                # A whitespace char
       (#{COMMANDS.keys.join('|')}):     # Captures all implemented commands until the colon. eg: `Kill:` will capture `Kill`. This is the same as (InitGame|Kill|..) but reusing the COMMANDS keys for it.
+      | (-----)                         # or consider also ----- (we will match it as shutdown comamnd since not all games on the log ends with the Shutdown command)
     }x
 
     # Process the log line and return the proper command with the extra arguments found on the line.
@@ -36,7 +38,7 @@ module QuakeLogParser::ParserStrategies
       match = COMMAND_REGEX.match(line)
       return unless match
 
-      result = COMMANDS[match.captures.first.to_sym]
+      result = COMMANDS[match.captures.compact.first.to_sym]
       [result[:command], result[:args_regex].match(line).captures]
     end
   end
