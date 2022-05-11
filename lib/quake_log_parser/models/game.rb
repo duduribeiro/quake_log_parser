@@ -35,6 +35,9 @@ module QuakeLogParser::Models
         @kills_by_player[killer] += 1
       end
     end
+
+    def kills_for(player_id)
+      @kills_by_player[@players[player_id]]
     end
 
     def start

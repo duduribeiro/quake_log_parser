@@ -9,7 +9,7 @@ class QuakeLogParser::Commands::InitGameTest < Minitest::Test
 
     QuakeLogParser::Commands::Kill.process(game, 42, 10, 22)
 
-    assert_equal 1, game.kills_by_player[42]
+    assert_equal 1, game.kills_for(42)
   end
 
   def test_decrease_the_dead_player_total_of_kills_when_killer_is_world
@@ -21,6 +21,6 @@ class QuakeLogParser::Commands::InitGameTest < Minitest::Test
     QuakeLogParser::Commands::Kill.process(game, 42, 10, 22)
     QuakeLogParser::Commands::Kill.process(game, QuakeLogParser::Models::World.new.player_id, 42, 22)
 
-    assert_equal 1, game.kills_by_player[42]
+    assert_equal 1, game.kills_for(42)
   end
 end
