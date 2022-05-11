@@ -20,6 +20,10 @@ module QuakeLogParser::Models
       @players[id] = Player.new(id) unless @players[id]
     end
 
+    def players_without_world
+      @players.reject { |_, player| player.world? }
+    end
+
     def kill(killer_id, ghost_id, _mean_of_death_id)
       @total_kills += 1
       killer = @players[killer_id.to_i]
