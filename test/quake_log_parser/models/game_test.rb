@@ -11,6 +11,18 @@ class QuakeLogParser::Models::GameTest < Minitest::Test
     refute_nil @game.players[42]
   end
 
+  def test_kill_saves_the_total_count_of_kills_for_the_game
+    @game.add_player(42)
+    @game.add_player(10)
+    @game.add_player(50)
+
+    @game.kill(42, 10, 22)
+    @game.kill(50, 42, 22)
+    @game.kill(10, 50, 22)
+
+    assert_equal 3, @game.total_kills
+  end
+
   def test_kill_register_a_proper_kill_for_the_killer
     @game.add_player(42)
     @game.add_player(10)

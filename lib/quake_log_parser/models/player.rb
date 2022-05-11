@@ -11,5 +11,9 @@ module QuakeLogParser::Models
     def world?
       false
     end
+
+    def to_s
+      @name
+    end
   end
 end

@@ -4,12 +4,13 @@ require "quake_log_parser/models/world"
 module QuakeLogParser::Models
   class Game
     attr_accessor :hostname
-    attr_reader :players, :kills_by_player, :round
+    attr_reader :players, :kills_by_player, :round, :total_kills
 
     def initialize(round = 0)
       @players = {}
       world = World.new
       @players[world.player_id] = world
+      @total_kills = 0
       @kills_by_player = Hash.new(0)
       @round = round
     end
@@ -20,12 +21,16 @@ module QuakeLogParser::Models
     end
 
     def kill(killer_id, ghost_id, _mean_of_death_id)
-      player = @players[killer_id.to_i]
-      if player.world?
-        @kills_by_player[ghost_id.to_i] -= 1
+      @total_kills += 1
+      killer = @players[killer_id.to_i]
+      ghost = @players[ghost_id.to_i]
+
+      if killer.world?
+        @kills_by_player[ghost] -= 1
       else
-        @kills_by_player[killer_id.to_i] += 1
+        @kills_by_player[killer] += 1
       end
+    end
     end
 
     def start
