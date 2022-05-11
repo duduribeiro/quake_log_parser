@@ -11,6 +11,14 @@ class QuakeLogParser::Models::GameTest < Minitest::Test
     refute_nil @game.players[42]
   end
 
+  def test_rename_player_renames_the_player
+    @game.add_player(42)
+
+    @game.rename_player(42, "batman")
+
+    assert_equal "batman", @game.players[42].name
+  end
+
   def test_kill_saves_the_total_count_of_kills_for_the_game
     @game.add_player(42)
     @game.add_player(10)

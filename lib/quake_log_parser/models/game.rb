@@ -22,6 +22,11 @@ module QuakeLogParser::Models
       @players[id] = Player.new(id) unless @players[id]
     end
 
+    def rename_player(player_id, new_name)
+      player = players[player_id.to_i]
+      player&.name = new_name
+    end
+
     def players_without_world
       @players.reject { |_, player| player.world? }
     end
