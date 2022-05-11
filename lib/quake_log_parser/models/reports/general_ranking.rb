@@ -6,7 +6,6 @@ module QuakeLogParser::Models::Reports
     end
 
     def generate
-      # require 'debug' ; binding.debugger
       @games.each do |game|
         game.kills_by_player.each do |player, kills_on_the_game|
           @general_ranking[player.name] += kills_on_the_game unless player.world?
