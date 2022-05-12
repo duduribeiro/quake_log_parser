@@ -1,7 +1,7 @@
 require "test_helper"
 require "quake_log_parser/models/world"
 
-class QuakeLogParser::Commands::InitGameTest < Minitest::Test
+class QuakeLogParser::Commands::KillTest < Minitest::Test
   def test_register_the_proper_kill
     game = QuakeLogParser::Models::Game.new
     game.add_player(42)
