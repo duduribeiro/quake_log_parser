@@ -19,7 +19,11 @@ module QuakeLogParser::Models
 
     def add_player(player_id)
       id = player_id.to_i
-      @players[id] = Player.new(id) unless @players[id]
+      unless @players[id]
+        player = Player.new(id)
+        @players[id] = player
+        @kills_by_player[player] = 0
+      end
     end
 
     def rename_player(player_id, new_name)
