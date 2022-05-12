@@ -22,9 +22,7 @@ class QuakeLogParser::Models::Reports::GameTest < Minitest::Test
 
     assert_equal 5, report_json["game_1"]["total_kills"]
 
-    assert_equal "batman", report_json["game_1"]["players"]["10"]
-    assert_equal "robin", report_json["game_1"]["players"]["20"]
-    assert_equal "joker", report_json["game_1"]["players"]["30"]
+    assert_equal ["batman", "robin", "joker"], report_json["game_1"]["players"]
 
     assert_equal 3, report_json["game_1"]["kills"]["batman"]
     assert_equal 1, report_json["game_1"]["kills"]["robin"]
